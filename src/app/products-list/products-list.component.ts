@@ -14,7 +14,27 @@ export class ProductsListComponent implements OnInit {
   constructor(private service: ProductsService) { }
 
   ngOnInit(): void {
-    this.service.getAll().subscribe((data: any) => this.items = data);
+    this.getAll();
   }
 
+  getAll() {
+    this.service.getAll().subscribe((data: any) => this.items = data);    
+  }
+
+  delete(id: number) {
+    this.service.delete(id).subscribe(
+      (data: any) => this.callBackSuccess(),
+      (error: any) => this.callBackError(error)
+    );
+  }
+
+  private callBackSuccess() {
+    alert('Registro excluído com sucesso');
+    this.getAll();
+  }
+
+  private callBackError(error: any) {
+      alert('Ocorreu um erro ao excluir');
+      console.log(error);
+  }
 }

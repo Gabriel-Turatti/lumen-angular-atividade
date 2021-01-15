@@ -1,3 +1,4 @@
+<a routerLink="/produtos/novo">Inserir Novo</a>
 <table>
     <tr>
         <th>ID</th>
@@ -9,6 +10,9 @@
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.price }}</td>
-        <td></td>
+        <td>
+            <a [routerLink]="'/produtos/' + item.id">Editar</a>
+            <button type="button" (click)="delete(item.id)">Excluir</button>
+        </td>
     </tr>
 </table>
