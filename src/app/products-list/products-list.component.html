@@ -1,18 +1,28 @@
-<a routerLink="/produtos/novo">Inserir Novo</a>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Preço</th>
-        <th>Ações</th>
-    </tr>
-    <tr *ngFor="let item of items">
-        <td>{{ item.id }}</td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.price }}</td>
-        <td>
-            <a [routerLink]="'/produtos/' + item.id">Editar</a>
-            <button type="button" (click)="delete(item.id)">Excluir</button>
-        </td>
-    </tr>
-</table>
+<a routerLink="/produtos/novo" class="btn btn-primary">Inserir Novo</a>
+<div class="row mt-3">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Ações</th>
+            </tr>
+            <tr *ngFor="let item of items">
+                <td>{{ item.id }}</td>
+                <td>
+                    {{ item.name }}
+                    <span *ngIf="!item.active" class="badge badge-secondary">Inativo</span>
+                </td>
+                <td>{{ item.price }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a [routerLink]="'/produtos/' + item.id" class="btn btn-success">Editar</a>
+                        <a [routerLink]="'/produtos/' + item.id + '/interesses'" class="btn btn-info">Ver interesses</a>
+                        <button type="button" (click)="delete(item.id)" class="btn btn-danger">Excluir</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

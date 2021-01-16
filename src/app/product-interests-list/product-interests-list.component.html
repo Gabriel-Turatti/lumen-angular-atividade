@@ -1,0 +1,26 @@
+<a [routerLink]="'/produtos/' + product_id + '/interesses/novo'" class="btn btn-primary">inserir novo </a>
+<div class="row mt-3">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Ações</th>
+            </tr>
+            <tr *ngFor="let item as items">
+                <th>{{ item.id }}</th>
+                <th>{{ item.product_id }} - {{ item.product_name }}</th>
+                <th>{{ item.name }}</th>
+                <th>{{ item.email }}</th>
+                <th>
+                    <div class="btn-group">
+                        <a [routerLink]="'/produtos/' + product_id + '/interesses/' + item.id" class="btn btn-success">Editar</a>
+                        <button (click)="delete(item.id)" class="btn btn-danger">Excluir</button>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>

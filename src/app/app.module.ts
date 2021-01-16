@@ -7,17 +7,23 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductsFormComponent } from './products-form/products-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductInterestsListComponent } from './product-interests-list/product-interests-list.component';
+import { ProductInterestsFormComponent } from './product-interests-form/product-interests-form.component';
 @NgModule({
   declarations: [
     AppComponent,
     ProductsListComponent,
-    ProductsFormComponent
+    ProductsFormComponent,
+    ProductInterestsListComponent,
+    ProductInterestsFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
