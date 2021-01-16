@@ -26,7 +26,7 @@ export class ProductInterestsService {
   }
 
   getOne(product_id: number, id: number) {
-    let url: string = this.baseUrl + "/" + product_id + "/interesses/";
+    let url: string = this.baseUrl + "/" + product_id + "/interesses/" + id;
     return this.http.get<ProductInterest>(url, { headers: this.headers });
   }
 
@@ -36,12 +36,12 @@ export class ProductInterestsService {
   }
 
   update(productInterest: ProductInterest) {
-    let url: string = this.baseUrl + "/" + productInterest.product_id + "/interesses" + productInterest.id;
+    let url: string = this.baseUrl + "/" + productInterest.product_id + "/interesses/" + productInterest.id;
     return this.http.put<any>(url, productInterest, { headers: this.headers });
   }
 
   delete(product_id: number, id: number) {
-    let url: string = this.baseUrl + "/" + product_id + "/interesses" + id;
+    let url: string = this.baseUrl + "/" + product_id + "/interesses/" + id;
     return this.http.delete<any>(url, { headers: this.headers });
   }
 }

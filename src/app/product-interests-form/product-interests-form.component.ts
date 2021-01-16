@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductInterest } from '../product-interest';
 import { ProductInterestsService } from '../product-interests.service';
@@ -11,9 +11,13 @@ import { ProductInterestsService } from '../product-interests.service';
 export class ProductInterestsFormComponent implements OnInit {
 
   item: ProductInterest;
+  errorFields: string[];
 
-  constructor(protected route: ActivatedRoute, protected router: Router, private service:ProductInterestsService) {
+  @ViewChild("alert") alert;
+
+  constructor(protected route: ActivatedRoute, protected router: Router, private service: ProductInterestsService) {
     this.item = new ProductInterest();
+    this.errorFields = [];
   }
 
   ngOnInit(): void {
@@ -30,6 +34,8 @@ export class ProductInterestsFormComponent implements OnInit {
   }
 
   save() {
+    this.errorFields = [];
+
     if(this.item.id) {
       this.service.update(this.item).subscribe(
         (data: any) => this.callbackSuccess(),
@@ -43,13 +49,27 @@ export class ProductInterestsFormComponent implements OnInit {
     }
   }
 
+  isInvalidField(field) {
+    return (this.errorFields.indexOf(field) != -1);
+  }
+
   private callbackSuccess() {
     this.router.navigate(['/produtos/' + this.item.product_id + '/interesses']);
   }
 
   private callbackError(error: any) {
-    alert('Ocorreu um problema ao salvar');
     console.log(error);
+
+    Object.keys(error.error).map(field => this.errorFields.push(field));
+
+
+    this.alert.type = "danger";
+
+    if(error.status == 422) {
+      this.alert.message = "Não foi possível salvar o registro. Os campos destacados estão inválidos.";
+    } else {
+      this.alert.message = "Ocorreu um problema ao salvar o registro.";
+    }
   }
 
 }

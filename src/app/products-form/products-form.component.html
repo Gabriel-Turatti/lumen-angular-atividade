@@ -1,21 +1,23 @@
+<app-header title="Formulário de produto" [subtitle]="item.name" buttonLink="/produtos" buttonText="Voltar"></app-header>
 <div class="row mt-3">
     <div class="col-12">
+        <app-alert #alert></app-alert>
         <form>
             <input type="hidden" name="id" id="id" [(ngModel)]="item.id">
             <div class="form-row">
                 <div class="form-group col-6">
                     <label for="name">Nome</label>
-                    <input type="text" name="name" id="name" class="form-control" [(ngModel)]="item.name"><br>
+                    <input type="text" name="name" id="name" [ngClass]="isInvalidField('name') ? 'form-control is-invalid' : 'form-control'" [(ngModel)]="item.name"><br>
                 </div>
                 <div class="form-group col-6">
-                    <form action="price">Preço</form>
-                    <input type="number" name="price" id="price" class="form-control" [(ngModel)]="item.price"><br>
+                    <label for="price">Preço</label>
+                    <input type="number" name="price" id="price" [ngClass]="isInvalidField('price') ? 'form-control is-invalid' : 'form-control'" [(ngModel)]="item.price"><br>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="description">Descrição</label>
-                    <textarea name="description" id="description" class="form-control" rows="5" [(ngModel)]="item.description"></textarea><br>
+                    <textarea name="description" id="description" [ngClass]="isInvalidField('description') ? 'form-control is-invalid' : 'form-control'" rows="5" [(ngModel)]="item.description"></textarea><br>
                 </div>
             </div>
             <div class="custom-control custom-switch">
